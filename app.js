@@ -6,6 +6,7 @@ var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+var catwaysRouter = require("./routes/catways");
 // On récupère la fonction écrite dans db/mongo.js
 const connexion = require("./db/mongo");
 
@@ -26,7 +27,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-
+app.use("/catways", catwaysRouter);
 app.use(function (req, res, next) {
   next(createError(404));
 });
