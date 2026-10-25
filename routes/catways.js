@@ -9,4 +9,11 @@ router.get("/", auth.checkJWT, async (req, res) => {
   return res.status(200).json(catways);
 });
 
+router.get("/:id", auth.checkJWT, async (req, res) => {
+  const catway = await service.getById(req.params.id);
+  if (!catway) {
+    return res.status(404).json({ message: "catway introuvable" });
+  }
+  return res.status(200).json(catway);
+});
 module.exports = router;
