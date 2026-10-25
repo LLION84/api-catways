@@ -7,3 +7,7 @@ exports.getAll = async () => {
 exports.getById = async (id) => {
   return await Catway.findOne({ catwayNumber: id });
 };
+
+exports.create = async (data) => {
+  return await Catway.create(data);
+};

@@ -16,4 +16,10 @@ router.get("/:id", auth.checkJWT, async (req, res) => {
   }
   return res.status(200).json(catway);
 });
+
+router.post("/", auth.checkJWT, async (req, res) => {
+  const catway = await service.create(req.body);
+  return res.status(201).json(catway);
+});
+
 module.exports = router;
