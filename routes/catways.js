@@ -30,4 +30,12 @@ router.delete("/:id", auth.checkJWT, async (req, res) => {
   return res.status(200).json({ message: "catway supprimé" });
 });
 
+router.patch("/:id", auth.checkJWT, async (req, res) => {
+  const catway = await service.update(req.params.id, req.body);
+  if (!catway) {
+    return res.status(404).json({ message: "catway introuvable" });
+  }
+  return res.status(200).json(catway);
+});
+
 module.exports = router;

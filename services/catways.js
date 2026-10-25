@@ -15,3 +15,9 @@ exports.create = async (data) => {
 exports.remove = async (id) => {
   return await Catway.findOneAndDelete({ catwayNumber: id });
 };
+
+exports.update = async (id, data) => {
+  return await Catway.findOneAndUpdate({ catwayNumber: id }, data, {
+    returnDocument: "after",
+  });
+};
