@@ -22,4 +22,12 @@ router.post("/", auth.checkJWT, async (req, res) => {
   return res.status(201).json(catway);
 });
 
+router.delete("/:id", auth.checkJWT, async (req, res) => {
+  const catway = await service.remove(req.params.id);
+  if (!catway) {
+    return res.status(404).json({ message: "catway introuvable" });
+  }
+  return res.status(200).json({ message: "catway supprimé" });
+});
+
 module.exports = router;
