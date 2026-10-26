@@ -23,3 +23,7 @@ exports.login = async (email, password) => {
   });
   return token;
 };
+
+exports.remove = async (id) => {
+  return await User.findByIdAndDelete(id);
+};
