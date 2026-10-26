@@ -12,3 +12,10 @@ exports.create = async (id, data) => {
   data.catwayNumber = id;
   return await Reservation.create(data);
 };
+
+exports.remove = async (id, idReservation) => {
+  return await Reservation.findOneAndDelete({
+    _id: idReservation,
+    catwayNumber: id,
+  });
+};

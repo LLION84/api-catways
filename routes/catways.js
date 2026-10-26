@@ -72,4 +72,19 @@ router.post("/:id/reservations", auth.checkJWT, async (req, res) => {
   return res.status(201).json(reservation);
 });
 
+router.delete(
+  "/:id/reservations/:idReservation",
+  auth.checkJWT,
+  async (req, res) => {
+    const reservation = await reservationService.remove(
+      req.params.id,
+      req.params.idReservation,
+    );
+    if (!reservation) {
+      return res.status(404).json({ message: "réservation introuvable" });
+    }
+    return res.status(200).json({ message: "réservation supprimée" });
+  },
+);
+
 module.exports = router;
