@@ -67,4 +67,9 @@ router.get(
   },
 );
 
+router.post("/:id/reservations", auth.checkJWT, async (req, res) => {
+  const reservation = await reservationService.create(req.params.id, req.body);
+  return res.status(201).json(reservation);
+});
+
 module.exports = router;
