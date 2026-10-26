@@ -1,6 +1,7 @@
-var express = require("express");
-var router = express.Router();
-var service = require("../services/catways");
+const express = require("express");
+const router = express.Router();
+const service = require("../services/catways");
+const reservationService = require("../services/reservations");
 
 const auth = require("../middlewares/private");
 
@@ -45,4 +46,10 @@ router.put("/:id", auth.checkJWT, async (req, res) => {
   }
   return res.status(200).json(catway);
 });
+
+router.get("/:id/reservations", auth.checkJWT, async (req, res) => {
+  const reservations = await reservationService.getAll(req.params.id);
+  return res.status(200).json(reservations);
+});
+
 module.exports = router;
