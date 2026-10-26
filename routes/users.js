@@ -39,4 +39,17 @@ router.delete("/:id", auth.checkJWT, async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 });
+
+router.patch("/:id", auth.checkJWT, async (req, res) => {
+  try {
+    const user = await service.update(req.params.id, req.body);
+    if (!user) {
+      return res.status(404).json({ message: "utilisateur introuvable" });
+    }
+    return res.status(200).json(user);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+});
+
 module.exports = router;

@@ -27,3 +27,10 @@ exports.login = async (email, password) => {
 exports.remove = async (id) => {
   return await User.findByIdAndDelete(id);
 };
+
+exports.update = async (id, data) => {
+  if (data.password) {
+    data.password = await bcrypt.hash(data.password, 10);
+  }
+  return await User.findByIdAndUpdate(id, data, { returnDocument: "after" });
+};
