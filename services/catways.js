@@ -21,3 +21,9 @@ exports.update = async (id, data) => {
     returnDocument: "after",
   });
 };
+
+exports.replace = async (id, data) => {
+  return await Catway.findOneAndReplace({ catwayNumber: id }, data, {
+    returnDocument: "after",
+  });
+};
