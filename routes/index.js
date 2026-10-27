@@ -1,12 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const userService = require("../services/users");
-
+const auth = require("../middlewares/private");
 /* GET home page. */
 router.get("/", function (req, res, next) {
   res.render("index", { title: "Port de plaisance Russell", error: null });
 });
-
+router.get("/dashboard", auth.checkJWT, function (req, res, next) {
+  res.render("dashboard");
+});
 router.post("/login", async (req, res) => {
   try {
     const token = await userService.login(req.body.email, req.body.password);

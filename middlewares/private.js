@@ -3,8 +3,7 @@ const jwt = require("jsonwebtoken");
 exports.checkJWT = (req, res, next) => {
   let token = req.cookies.token;
   const header = req.headers.authorization;
-  if (!token) {
-    !token && header;
+  if (!token && header) {
     token = header.slice(7);
   }
 
