@@ -6,5 +6,23 @@
   </head>
   <body>
     <h1>Tableau de bord</h1>
+    <% if (message) { %>
+<p><%= message %></p>
+<% } %>
+    <h2>Créer un catway</h2>
+    <form action="/dashboard/catways" method="POST">
+      <input
+        type="number"
+        name="catwayNumber"
+        placeholder="Numéro du catway"
+        required
+      />
+      <select name="type">
+        <option value="long">long</option>
+        <option value="short">short</option>
+      </select>
+      <input name="catwayState" placeholder="État du catway" required />
+      <button>Créer</button>
+    </form>
   </body>
 </html>
