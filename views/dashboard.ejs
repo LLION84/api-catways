@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <title>Tableau de bord</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
@@ -11,17 +11,21 @@
 <% } %>
     <h2>Créer un catway</h2>
     <form action="/dashboard/catways" method="POST">
+      label for="catwayNumber">Numéro du catway</label>
       <input
         type="number"
         name="catwayNumber"
         placeholder="Numéro du catway"
+        id="catwayNumber"
         required
       />
-      <select name="type">
+      label for="type">Type de catway</label>
+      <select name="type" id="type">
         <option value="long">long</option>
         <option value="short">short</option>
       </select>
-      <input name="catwayState" placeholder="État du catway" required />
+      label for="catwayState">État du catway</label>
+      <input name="catwayState" placeholder="État du catway" required  id="catwayState"/>
       <button>Créer</button>
     </form>
   </body>
