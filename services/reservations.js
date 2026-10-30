@@ -23,3 +23,7 @@ exports.remove = async (id, idReservation) => {
 exports.list = async () => {
   return await Reservation.find();
 };
+
+exports.findById = async (idReservation) => {
+  return await Reservation.findById(idReservation);
+};

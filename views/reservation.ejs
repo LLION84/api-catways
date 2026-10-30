@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>Réservation de <%= reservation.clientName %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <h1>Réservation de <%= reservation.clientName %></h1>
+    <a href="/dashboard">← Retour au tableau de bord</a>
+    <ul>
+      <li>Catway n° : <%= reservation.catwayNumber %></li>
+      <li>Bateau : <%= reservation.boatName %></li>
+      <li>Arrivée : <%= reservation.checkIn.toLocaleDateString("fr-FR") %></li>
+      <li>Départ : <%= reservation.checkOut.toLocaleDateString("fr-FR") %></li>
+    </ul>
+  </body>
+</html>

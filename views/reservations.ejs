@@ -11,7 +11,7 @@
       <% reservations.forEach((reservation) => { %>
         <li>
           Catway n°<%= reservation.catwayNumber %> —
-          <%= reservation.clientName %> (<%= reservation.boatName %>) —
+          <a href="/dashboard/reservation?id=<%= reservation._id %>"><%= reservation.clientName %></a> (<%= reservation.boatName %>) —
           du <%= reservation.checkIn.toLocaleDateString("fr-FR") %>
           au <%= reservation.checkOut.toLocaleDateString("fr-FR") %>
         </li>
