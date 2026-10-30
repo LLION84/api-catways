@@ -3,6 +3,7 @@ const router = express.Router();
 const userService = require("../services/users");
 const auth = require("../middlewares/private");
 const catwayService = require("../services/catways");
+const reservationService = require("../services/reservations");
 /* GET home page. */
 router.get("/", function (req, res, next) {
   res.render("index", { title: "Port de plaisance Russell", error: null });
@@ -18,6 +19,32 @@ router.post("/dashboard/catways", auth.checkJWT, async (req, res) => {
     return res.render("dashboard", { message: "Catway créé" });
   } catch (error) {
     res.render("dashboard", { error: error.message });
+  }
+});
+
+router.post("/dashboard/catways/delete", auth.checkJWT, async (req, res) => {
+  try {
+    const catway = await catwayService.remove(req.body.id);
+    if (!catway) {
+      return res.render("dashboard", { message: "Catway introuvable" });
+    }
+    return res.render("dashboard", { message: "Catway supprimé" });
+  } catch (error) {
+    return res.render("dashboard", { message: error.message });
+  }
+});
+
+router.post("/dashboard/catways/update", auth.checkJWT, async (req, res) => {
+  try {
+    const catway = await catwayService.update(req.body.id, {
+      catwayState: req.body.catwayState,
+    });
+    if (!catway) {
+      return res.render("dashboard", { message: "Catway introuvable" });
+    }
+    return res.render("dashboard", { message: "État du catway modifié" });
+  } catch (error) {
+    return res.render("dashboard", { message: error.message });
   }
 });
 
@@ -37,6 +64,14 @@ router.post("/login", async (req, res) => {
       title: "Port de plaisance Russell",
       error: error.message,
     });
+  }
+});
+router.post("/dashboard/reservations", auth.checkJWT, async (req, res) => {
+  try {
+    await reservationService.create(req.body.catwayNumber, req.body);
+    return res.render("dashboard", { message: "Réservation enregistrée" });
+  } catch (error) {
+    return res.render("dashboard", { message: error.message });
   }
 });
 module.exports = router;

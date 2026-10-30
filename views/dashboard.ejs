@@ -11,7 +11,7 @@
 <% } %>
     <h2>Créer un catway</h2>
     <form action="/dashboard/catways" method="POST">
-      label for="catwayNumber">Numéro du catway</label>
+      <label for="catwayNumber">Numéro du catway</label>
       <input
         type="number"
         name="catwayNumber"
@@ -19,14 +19,47 @@
         id="catwayNumber"
         required
       />
-      label for="type">Type de catway</label>
+      <label for="type">Type de catway</label>
       <select name="type" id="type">
         <option value="long">long</option>
         <option value="short">short</option>
       </select>
-      label for="catwayState">État du catway</label>
+      <label for="catwayState">État du catway</label>
       <input name="catwayState" placeholder="État du catway" required  id="catwayState"/>
       <button>Créer</button>
+    </form>
+    <h2>Supprimer un catway</h2>
+    <form action="/dashboard/catways/delete" method="POST">
+      <label for="catwayId">ID du catway</label>
+      <input
+        type="number"
+        name="id"
+        placeholder="Numéro du catway"
+        required
+        id="catwayId"
+      />
+      <button>Supprimer</button>
+    </form>
+    <h2>Modifier l'état d'un catway</h2>
+    <form action="/dashboard/catways/update" method="POST">
+      <label for="updateCatwayId">Numéro du catway</label>
+      <input type="number" name="id" id="updateCatwayId" placeholder="Numéro du catway" required />
+      <label for="updateCatwayState">Nouvel état</label>
+      <input name="catwayState" id="updateCatwayState" placeholder="Ex : réparé" required />
+      <button>Modifier</button>
+    </form>
+    <h2>Enregistrer une réservation</h2>
+    <form action="/dashboard/reservations" method="POST">
+      <label for="resCatwayNumber">Numéro du catway</label>
+      <input type="number" name="catwayNumber" id="resCatwayNumber" placeholder="Numéro du catway" required />
+      <label for="clientName">Nom du client</label>
+      <input name="clientName" id="clientName" placeholder="Nom du client" required />
+      <label for="boatName">Nom du bateau</label>
+      <input name="boatName" id="boatName" placeholder="Nom du bateau" required /><label for="checkIn">Date d'arrivée</label>
+      <input type="date" name="checkIn" id="checkIn" required />
+      <label for="checkOut">Date de départ</label>
+      <input type="date" name="checkOut" id="checkOut" required />
+      <button>Enregistrer</button>
     </form>
   </body>
 </html>

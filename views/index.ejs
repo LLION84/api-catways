@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <title><%= title %></title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
@@ -17,8 +17,11 @@
 <% } %>
 
     <form action="/login" method="POST">
-      <input type="email" name="email" placeholder="Email" required />
+      <label for="email">Email</label>
+      <input id="email" type="email" name="email" placeholder="Email" required />
+      <label for="password">Mot de passe</label>
       <input
+        id="password"
         type="password"
         name="password"
         placeholder="Mot de passe"
