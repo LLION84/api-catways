@@ -148,4 +148,15 @@ router.get("/dashboard/reservations", auth.checkJWT, async (req, res) => {
     return res.render("dashboard", { message: error.message });
   }
 });
+router.get("/dashboard/catway", auth.checkJWT, async (req, res) => {
+  try {
+    const catway = await catwayService.getById(req.query.id);
+    if (!catway) {
+      return res.render("dashboard", { message: "Catway introuvable" });
+    }
+    return res.render("catway", { catway: catway });
+  } catch (error) {
+    return res.render("dashboard", { message: error.message });
+  }
+});
 module.exports = router;

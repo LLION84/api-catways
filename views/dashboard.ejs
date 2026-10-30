@@ -9,8 +9,8 @@
     <a href="/dashboard/catways">Liste des catways</a>
     <a href="/dashboard/reservations">Liste des réservations</a>
     <% if (message) { %>
-<p><%= message %></p>
-<% } %>
+    <p><%= message %></p>
+    <% } %>
     <h2>Créer un catway</h2>
     <form action="/dashboard/catways" method="POST">
       <label for="catwayNumber">Numéro du catway</label>
@@ -71,7 +71,7 @@
       <input name="idReservation" id="delResId" placeholder="Ex : 6ad88c31..." required />
       <button>Supprimer</button>
     </form>
-  </body>
+  
       <h2>Créer un utilisateur</h2>
     <form action="/dashboard/users" method="POST">
       <label for="userName">Nom</label>
@@ -102,4 +102,12 @@
       <input name="id" id="delUserId" placeholder="Ex : 6ad9756b..." required />
       <button>Supprimer</button>
     </form>
+        <h2>Détails d'un catway</h2>
+    <form action="/dashboard/catway" method="GET">
+      <label for="detailCatwayId">Numéro du catway</label>
+      <input type="number" name="id" id="detailCatwayId" placeholder="Numéro du catway" required />
+      <button>Afficher</button>
+    </form>
+
+  </body>
 </html>

@@ -10,7 +10,10 @@
     <ul>
       <% catways.forEach((catway) => { %>
         <li>
-          Catway n°<%= catway.catwayNumber %> — <%= catway.type %> — <%= catway.catwayState %>
+          <a href="/dashboard/catway?id=<%= catway.catwayNumber %>">
+            Catway n°<%= catway.catwayNumber %>
+          </a>
+          — <%= catway.type %> — <%= catway.catwayState %>
         </li>
       <% }) %>
     </ul>
