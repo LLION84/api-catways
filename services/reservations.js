@@ -19,3 +19,7 @@ exports.remove = async (id, idReservation) => {
     catwayNumber: id,
   });
 };
+
+exports.list = async () => {
+  return await Reservation.find();
+};

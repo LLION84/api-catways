@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>Liste des réservations</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <h1>Liste des réservations</h1>
+    <a href="/dashboard">← Retour au tableau de bord</a>
+    <ul>
+      <% reservations.forEach((reservation) => { %>
+        <li>
+          Catway n°<%= reservation.catwayNumber %> —
+          <%= reservation.clientName %> (<%= reservation.boatName %>) —
+          du <%= reservation.checkIn.toLocaleDateString("fr-FR") %>
+          au <%= reservation.checkOut.toLocaleDateString("fr-FR") %>
+        </li>
+      <% }) %>
+    </ul>
+  </body>
+</html>

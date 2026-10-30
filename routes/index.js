@@ -19,6 +19,7 @@ router.post("/dashboard/catways", auth.checkJWT, async (req, res) => {
     return res.render("dashboard", { message: "Catway créé" });
   } catch (error) {
     res.render("dashboard", { error: error.message });
+    return res.render("dashboard", { message: error.message });
   }
 });
 
@@ -135,6 +136,14 @@ router.get("/dashboard/catways", auth.checkJWT, async (req, res) => {
   try {
     const catways = await catwayService.getAll();
     return res.render("catways", { catways: catways });
+  } catch (error) {
+    return res.render("dashboard", { message: error.message });
+  }
+});
+router.get("/dashboard/reservations", auth.checkJWT, async (req, res) => {
+  try {
+    const reservations = await reservationService.list();
+    return res.render("reservations", { reservations: reservations });
   } catch (error) {
     return res.render("dashboard", { message: error.message });
   }
