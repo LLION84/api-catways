@@ -70,4 +70,34 @@
       <button>Supprimer</button>
     </form>
   </body>
+      <h2>Créer un utilisateur</h2>
+    <form action="/dashboard/users" method="POST">
+      <label for="userName">Nom</label>
+      <input name="name" id="userName" placeholder="Nom" required />
+      <label for="userEmail">Email</label>
+      <input type="email" name="email" id="userEmail" placeholder="Email" required />
+      <label for="userPassword">Mot de passe</label>
+      <input type="password" name="password" id="userPassword" placeholder="Mot de passe" required />
+      <button>Créer</button>
+    </form>
+
+    <h2>Modifier un utilisateur</h2>
+    <form action="/dashboard/users/update" method="POST">
+      <label for="updUserId">ID de l'utilisateur</label>
+      <input name="id" id="updUserId" placeholder="Ex : 6ad9756b..." required />
+      <label for="updUserName">Nouveau nom</label>
+      <input name="name" id="updUserName" placeholder="Laisser vide si inchangé" />
+      <label for="updUserEmail">Nouvel email</label>
+      <input type="email" name="email" id="updUserEmail" placeholder="Laisser vide si inchangé" />
+      <label for="updUserPassword">Nouveau mot de passe</label>
+      <input type="password" name="password" id="updUserPassword" placeholder="Laisser vide si inchangé" />
+      <button>Modifier</button>
+    </form>
+
+    <h2>Supprimer un utilisateur</h2>
+    <form action="/dashboard/users/delete" method="POST">
+      <label for="delUserId">ID de l'utilisateur</label>
+      <input name="id" id="delUserId" placeholder="Ex : 6ad9756b..." required />
+      <button>Supprimer</button>
+    </form>
 </html>

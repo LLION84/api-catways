@@ -92,4 +92,43 @@ router.post(
     }
   },
 );
+router.post("/dashboard/users", auth.checkJWT, async (req, res) => {
+  try {
+    await userService.add(req.body);
+    return res.render("dashboard", { message: "Utilisateur créé" });
+  } catch (error) {
+    return res.render("dashboard", { message: error.message });
+  }
+});
+
+router.post("/dashboard/users/update", auth.checkJWT, async (req, res) => {
+  try {
+    // On ne garde que les champs remplis,
+    // sinon un champ laissé vide effacerait l'ancienne valeur
+    const data = {};
+    if (req.body.name) data.name = req.body.name;
+    if (req.body.email) data.email = req.body.email;
+    if (req.body.password) data.password = req.body.password;
+
+    const user = await userService.update(req.body.id, data);
+    if (!user) {
+      return res.render("dashboard", { message: "Utilisateur introuvable" });
+    }
+    return res.render("dashboard", { message: "Utilisateur modifié" });
+  } catch (error) {
+    return res.render("dashboard", { message: error.message });
+  }
+});
+
+router.post("/dashboard/users/delete", auth.checkJWT, async (req, res) => {
+  try {
+    const user = await userService.remove(req.body.id);
+    if (!user) {
+      return res.render("dashboard", { message: "Utilisateur introuvable" });
+    }
+    return res.render("dashboard", { message: "Utilisateur supprimé" });
+  } catch (error) {
+    return res.render("dashboard", { message: error.message });
+  }
+});
 module.exports = router;
