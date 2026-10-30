@@ -61,5 +61,13 @@
       <input type="date" name="checkOut" id="checkOut" required />
       <button>Enregistrer</button>
     </form>
+        <h2>Supprimer une réservation</h2>
+    <form action="/dashboard/reservations/delete" method="POST">
+      <label for="delResCatway">Numéro du catway</label>
+      <input type="number" name="catwayNumber" id="delResCatway" placeholder="Numéro du catway" required />
+      <label for="delResId">ID de la réservation</label>
+      <input name="idReservation" id="delResId" placeholder="Ex : 6ad88c31..." required />
+      <button>Supprimer</button>
+    </form>
   </body>
 </html>

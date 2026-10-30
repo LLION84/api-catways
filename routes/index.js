@@ -74,4 +74,22 @@ router.post("/dashboard/reservations", auth.checkJWT, async (req, res) => {
     return res.render("dashboard", { message: error.message });
   }
 });
+router.post(
+  "/dashboard/reservations/delete",
+  auth.checkJWT,
+  async (req, res) => {
+    try {
+      const reservation = await reservationService.remove(
+        req.body.catwayNumber,
+        req.body.idReservation,
+      );
+      if (!reservation) {
+        return res.render("dashboard", { message: "Réservation introuvable" });
+      }
+      return res.render("dashboard", { message: "Réservation supprimée" });
+    } catch (error) {
+      return res.render("dashboard", { message: error.message });
+    }
+  },
+);
 module.exports = router;
