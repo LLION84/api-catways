@@ -18,11 +18,9 @@ router.post("/dashboard/catways", auth.checkJWT, async (req, res) => {
     await catwayService.create(req.body);
     return res.render("dashboard", { message: "Catway créé" });
   } catch (error) {
-    res.render("dashboard", { error: error.message });
     return res.render("dashboard", { message: error.message });
   }
 });
-
 router.post("/dashboard/catways/delete", auth.checkJWT, async (req, res) => {
   try {
     const catway = await catwayService.remove(req.body.id);
