@@ -8,7 +8,9 @@ const reservationService = require("../services/reservations");
 router.get("/", function (req, res, next) {
   res.render("index", { title: "Port de plaisance Russell", error: null });
 });
-
+router.get("/docs", function (req, res, next) {
+  res.render("docs");
+});
 router.get("/dashboard", auth.checkJWT, function (req, res, next) {
   res.render("dashboard", { message: null });
 });

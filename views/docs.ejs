@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>Documentation de l'API</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <h1>Documentation de l'API — Port de plaisance Russell</h1>
+    <a href="/">← Retour à l'accueil</a>
+
+    <h2>1. Vue d'ensemble</h2>
+    <p>
+      Cette API privée permet à la capitainerie du port de plaisance Russell de
+      gérer les catways et leurs réservations. Toutes les routes, sauf la
+      connexion, demandent un token d'authentification.
+    </p>
+
+    <h3>Utilisateurs</h3>
+    <ul>
+      <li><code>POST /users/login</code> — se connecter, renvoie un token</li>
+      <li><code>POST /users</code> — créer un utilisateur</li>
+      <li><code>PATCH /users/:id</code> — modifier un utilisateur</li>
+      <li><code>DELETE /users/:id</code> — supprimer un utilisateur</li>
+    </ul>
+
+    <h3>Catways</h3>
+    <ul>
+      <li><code>GET /catways</code> — lister tous les catways</li>
+      <li><code>GET /catways/:id</code> — détails d'un catway</li>
+      <li><code>POST /catways</code> — créer un catway</li>
+      <li><code>PUT /catways/:id</code> — remplacer entièrement un catway</li>
+      <li><code>PATCH /catways/:id</code> — modifier une partie d'un catway (ex : son état)</li>
+      <li><code>DELETE /catways/:id</code> — supprimer un catway</li>
+    </ul>
+
+    <h3>Réservations</h3>
+    <ul>
+      <li><code>GET /catways/:id/reservations</code> — lister les réservations d'un catway</li>
+      <li><code>GET /catways/:id/reservations/:idReservation</code> — détails d'une réservation</li>
+      <li><code>POST /catways/:id/reservations</code> — réserver un catway</li>
+      <li><code>DELETE /catways/:id/reservations/:idReservation</code> — supprimer une réservation</li>
+    </ul>
+
+    <h2>2. Tutoriel</h2>
+    <ol>
+      <li>
+        Se connecter avec <code>POST /users/login</code>, en envoyant l'email
+        et le mot de passe en JSON.
+      </li>
+      <li>Récupérer le <code>token</code> renvoyé dans la réponse.</li>
+      <li>
+        L'envoyer dans chaque requête suivante, dans l'en-tête
+        <code>Authorization: Bearer &lt;token&gt;</code>.
+      </li>
+      <li>Le token est valable 24 heures. Ensuite, il faut se reconnecter.</li>
+    </ol>
+    <p>
+      Depuis le navigateur, la connexion se fait avec le formulaire de la page
+      d'accueil : le token est alors gardé automatiquement dans un cookie.
+    </p>
+
+    <h2>3. Exemples</h2>
+
+    <h3>Se connecter</h3>
+    <pre>POST /users/login
+Content-Type: application/json
+
+{ "email": "employe@port-russell.fr", "password": "motdepasse" }</pre>
+    <p>Réponse <code>200</code> :</p>
+    <pre>{ "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." }</pre>
+
+    <h3>Récupérer un catway</h3>
+    <pre>GET /catways/12
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...</pre>
+    <p>Réponse <code>200</code> :</p>
+    <pre>{ "catwayNumber": 12, "type": "short", "catwayState": "bon état" }</pre>
+
+    <h3>Réserver un catway</h3>
+    <pre>POST /catways/20/reservations
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+Content-Type: application/json
+
+{
+  "clientName": "Jean Dupont",
+  "boatName": "Mistral",
+  "checkIn": "2026-11-01",
+  "checkOut": "2026-11-15"
+}</pre>
+    <p>Réponse <code>201</code> : la réservation créée.</p>
+
+    <h3>Codes de réponse</h3>
+    <ul>
+      <li><code>200</code> — OK</li>
+      <li><code>201</code> — ressource créée</li>
+      <li><code>401</code> — token manquant ou invalide</li>
+      <li><code>404</code> — ressource introuvable</li>
+      <li><code>500</code> — erreur côté serveur</li>
+    </ul>
+
+    <h2>4. Glossaire</h2>
+    <ul>
+      <li><strong>Catway</strong> — petit appontement où l'on amarre un bateau. Il a un numéro, un type (long ou short) et un état.</li>
+      <li><strong>Réservation</strong> — l'occupation d'un catway par un bateau, entre une date d'arrivée (checkIn) et une date de départ (checkOut).</li>
+      <li><strong>Capitainerie</strong> — le bureau qui gère le port. Ses employés sont les utilisateurs de l'API.</li>
+      <li><strong>API REST</strong> — une interface où l'adresse désigne la ressource, et la méthode HTTP (GET, POST, PUT, PATCH, DELETE) indique l'action.</li>
+      <li><strong>Token / JWT</strong> — une preuve de connexion signée par le serveur, valable 24 heures.</li>
+      <li><strong>Bearer</strong> — le mot placé devant le token dans l'en-tête Authorization.</li>
+      <li><strong>PUT / PATCH</strong> — PUT remplace tout l'objet, PATCH n'en modifie qu'une partie.</li>
+    </ul>
+  </body>
+</html>
