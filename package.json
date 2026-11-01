@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "npm test && env-cmd -f ./env/.env node ./bin/www",
+    "start": "mocha tests && node ./bin/www",
+    "dev": "env-cmd -f ./env/.env npm start",
     "test": "env-cmd -f ./env/.env mocha tests"
   },
   "dependencies": {
