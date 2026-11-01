@@ -1,5 +1,13 @@
 const jwt = require("jsonwebtoken");
 
+/**
+ * Middleware qui protège une route : laisse passer seulement les utilisateurs connectés.
+ * Le token est lu dans le cookie (navigateur) ou dans l'en-tête Authorization (Postman).
+ * @param {Object} req - La requête Express
+ * @param {Object} res - La réponse Express
+ * @param {Function} next - Passe à la suite si le token est valide
+ * @returns {void}
+ */
 exports.checkJWT = (req, res, next) => {
   let token = req.cookies.token;
   const header = req.headers.authorization;
